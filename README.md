@@ -10,9 +10,15 @@ modular and conditional gulp setup
 * imagemin
 * SVG spritesheets
 
-## Tasks
+## Setup
 
-run **gulp --production** for minified, versioned js and css
+All path definitions/configurations are done in  **gulp-config.json**.<return>
+Decide what tasks you want to include in your project. Uncomment for them to work.
+
+## Conditionals
+
+When you are ready to ship, use the flag --production to minify and uglify. <return>
+run **gulp --production**.
 
 ## Todos
 
