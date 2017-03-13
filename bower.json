@@ -1,0 +1,12 @@
+{
+  "name": "Woppe",
+  "homepage": "https://pettico.de",
+  "authors": [
+    "Wieteke Ozturk <wieteke@pettico.de>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "git://github.com/twbs/bootstrap.git#v4.0.0-alpha.6"
+  }
+}

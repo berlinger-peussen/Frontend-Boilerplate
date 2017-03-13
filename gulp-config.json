@@ -1,0 +1,11 @@
+{
+  "path": {
+    "devUrl": "http://petrahulkenberg.woppe.nl",
+    "source": "./assets/",
+    "dist":"../dist/",
+    "images": "./assets/images",
+    "svg": "./assets/svg/*.svg",
+    "fonts": "./assets/fonts",
+    "files": "['../{lib,templates}/**/*.php', '*.php']"
+  }
+}
