@@ -1,4 +1,4 @@
-# Task-Runner-Boilerplate
+# Frontend-Boilerplate
 modular and conditional gulp setup
 
 ## Features
