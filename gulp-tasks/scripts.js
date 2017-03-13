@@ -9,13 +9,16 @@ const jsTasks = (filename) => {
     .pipe( () => {
       return plugins.if(isEnabled.maps, plugins.sourcemaps.init());
     })
+    .pipe( () => {
+      return plugins.if(manifest.getProjectGlobs().js, plugins.babel({presets: ["es2015"]}));
+    })
     .pipe(concat, filename)
     .pipe(plugins.uglify, {
       compress: {
         'drop_debugger': isEnabled.stripJSDebug
       }
     })
-    .pipe(() => {
+    .pipe( () => {
       return plugins.if(isEnabled.rev, plugins.rev());
     })
     .pipe( () => {
