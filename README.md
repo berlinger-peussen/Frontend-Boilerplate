@@ -3,6 +3,7 @@ modular and conditional gulp setup
 
 ## Features
 
+* INUITCSS
 * sasslint
 * jshint
 * versioning
