@@ -1,6 +1,6 @@
 {
   "path": {
-    "devUrl": "http://petrahulkenberg.woppe.nl",
+    "devUrl": "http://<project>.woppe.nl",
     "source": "./assets/",
     "dist":"../dist/",
     "images": "./assets/images",

@@ -20,7 +20,7 @@ module.exports = (config, gulp, argv, browserSync, lazypipe, plugins, isEnabled)
       })
       .pipe( () => {
          plugins.if(isEnabled.maps, plugins.sourcemaps.write('.', {
-          sourceRoot: 'assets/scripts/'
+          sourceRoot: config.path.source + 'scripts/'
         }));
       })();
   };
@@ -36,7 +36,7 @@ module.exports = (config, gulp, argv, browserSync, lazypipe, plugins, isEnabled)
   };
   gulp.task('jshint', () => {
      gulp.src([
-      'bower.json', 'gulpfile.js'
+      'bower.json', 'gulpfile.babel.js'
     ].concat(manifest.getProjectGlobs().js))
       .pipe(plugins.jshint())
       .pipe(plugins.jshint.reporter('jshint-stylish'))

@@ -33,7 +33,7 @@ module.exports = (config, gulp, argv, browserSync, lazypipe, plugins, isEnabled)
 	    })
 	    .pipe( () => {
 	      plugins.if(isEnabled.maps, plugins.sourcemaps.write('.', {
-	        sourceRoot: 'assets/styles/'
+	        sourceRoot: config.path + 'styles/'
 	      }));
 	    })();
 	};	
