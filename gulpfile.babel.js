@@ -4,6 +4,7 @@
 //const - es6 syntax, require - nodeJS syntax, use with module.exports in tasks
 const config 			= require('./gulp-config.json'), 
 		  gulp        = require('gulp'),
+		  gutil 			= require('gulp-util'),
 		  //used for passing flag and using conditionals in gulp tasks e.g. sourcemaps and minification
 		  argv        = require('minimist')(process.argv.slice(2)),
 		  //auto browsersync on changes, yay
@@ -21,6 +22,17 @@ const config 			= require('./gulp-config.json'),
 		  	}
 		  });
 
+const writeToManifest = (directory) => {
+  return lazypipe()
+    .pipe(gulp.dest, config.path.dist + directory)
+    .pipe(browserSync.stream, {match: '**/*.{js,css}'})
+    .pipe(plugins.rev.manifest, config.path.dist + 'assets.json', {
+      base: config.path.dist,
+      merge: true
+    })
+    .pipe(gulp.dest, config.path.dist)();
+};
+
 
 //symantic map for gulp --production flag options
 const isEnabled 	= {
@@ -34,13 +46,12 @@ const isEnabled 	= {
 		failOnStyle: argv.production,
 		//fail scripts when --production
 		failOnJSHint: argv.production
-}
-
+};
 
 //tasks, require and define which vars are needed
-require('./gulp-tasks/browsersync')(config, gulp, browserSync);
-require('./gulp-tasks/styles')(config, gulp, argv, browserSync, lazypipe, plugins, isEnabled);
-require('./gulp-tasks/scripts')(config, gulp, argv, browserSync, lazypipe, plugins, isEnabled);
+//require('./gulp-tasks/browsersync')(config, gulp, browserSync);
+require('./gulp-tasks/styles')(config, gulp, argv, browserSync, writeToManifest, lazypipe, plugins, isEnabled, gutil);
+require('./gulp-tasks/scripts')(config, gulp, argv, browserSync, writeToManifest, lazypipe, plugins, isEnabled);
 //require('./gulp-tasks/media')(config, gulp, plugins, del);
 //require('./gulp-tasks/svg')(config, gulp, plugins, del);
 //require('./gulp-tasks/fonts')(config, gulp, plugins, del);
@@ -59,12 +70,11 @@ gulp.task('default', ['clean'], () => {
 	gulp.start('build');
 });
 
-gulp.task('watch',() => {
-	gulp.start('browsersync');
-  gulp.watch([config.path.source + 'styles/**/*'], ['styles']);
+gulp.task('watch', () => {
+	//gulp.start('browsersync');
+  gulp.watch([config.path.source + 'styles/**/*'], ['scsslint', 'styles']);
   gulp.watch([config.path.source + 'scripts/**/*'], ['jshint', 'scripts']);
   //gulp.watch([config.path.source + 'fonts/**/*'], ['fonts']);
   //gulp.watch([config.path.source + 'images/**/*'], ['images']);
   gulp.watch(['bower.json', 'gulpfile.babel.js', './assets/manifest.json'], ['build']);
 });
-
