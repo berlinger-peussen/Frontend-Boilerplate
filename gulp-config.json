@@ -6,6 +6,11 @@
     "images": "./assets/images",
     "svg": "./assets/svg/*.svg",
     "fonts": "./assets/fonts",
-    "files": "['../{lib,templates}/**/*.php', '*.php']"
+    "files": [
+      "../{lib,templates}/**/*.php",
+      "*.php",
+      "./assets/scripts/**/*.js",
+          "./assets/styles/**/*.scss"
+     ]
   }
 }
